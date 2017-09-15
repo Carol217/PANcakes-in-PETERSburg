@@ -7,5 +7,9 @@
 import csv
 
 '''Step 1: read file'''
-target_doc = csv.reader(open('../occupations.', 'rU'), delimiter = ",", quotechar = "|")
-print target_doc
+dictv = {'':''}
+target_doc = csv.reader(open('occupations.csv', 'rU'), delimiter = ",", quotechar = "|")
+for row in target_doc:
+	dictv[row[0]] = row[1]
+	#print dictv
+print dictv
