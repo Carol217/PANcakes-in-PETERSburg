@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{foo}}</title>
+  </head>
+  <body>
+    this is a descriptive heading
+    {% if csv %}
+    <table>
+      {% for arr in csv %}
+      <tr>
+	<td> {{ arr[0] }} </td>
+	<td> {{ arr[1] }} </td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+    {% if a %}
+    your random occupation is {{a}}
+    {% endif %}
+  </body>
+</html>
