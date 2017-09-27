@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>{{title}}</title>
+	<!-- Imports bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -11,10 +12,10 @@
 	<h1 class="jumbotron" style="text-align:center">Here is the data with that details the percentages for a Job Class.</h1>
 	<h2>Click to expand the table</h2>
 	{% if csv %}
-	<table class="table table-striped table-hover">
+	<table class="table table-striped table-hover"> <!-- Some bootstrap things, makes it pretty-->
 		{% for arr in csv %}
 		{% if arr[1]=="Percentage" %}
-		<thead data-toggle="collapse" data-target="#tabcol" title="expand/collapse tables" style="cursor:pointer;">
+		<thead data-toggle="collapse" data-target="#tabcol" title="expand/collapse tables" style="cursor:pointer;"> <!-- Collapsing tables, because style -->
 			<tr>
 				<th> {{ arr[0] }} </th>
 				<th> {{ arr[1] }} </th>
@@ -33,15 +34,16 @@
 	{% endif %}
 	<h2>Here is your random job</h2>
 	<p>Generated with jinja code. Fun fact: jinja is awful</p>
-	{% if csv2 and rand %}
-		{% set holder = {'value': rand} %}
-		{% for arrj in csv2 %}
-			{% if holder.value < 0 %}
-				Job: {{ arrj[0] }}, Percentage: {{ arrj[1] }}
-				{% if holder.update({'value': 10000}) %} {% endif %}
+	{% if csv2 and rand %} <!-- Checks to see if the csv and rand have been sent -->
+		<!-- This function works the same as last time: a random number is subtracted from until it is below 0, at which point it prints it's value -->
+		{% set holder = {'value': rand} %} <!-- this is the variable, setting it up  -->
+		{% for arrj in csv2 %} <!-- for every array in the csv; note: arrj stands for array of jobs, csv2 is becaus csv is taken -->
+			{% if holder.value < 0 %} <!-- When the variable gets below 0, you know to print-->
+				Job: {{ arrj[0] }}, Percentage: {{ arrj[1] }} <!-- Printing -->
+				{% if holder.update({'value': 10000}) %} {% endif %} <!-- Resets the variable so it can't go below 0 again -->
 			{% endif %}
-			{% set var = holder.value - arrj[1]|float %}
-			{% if holder.update({'value': var}) %} {% endif %}
+			{% set var = holder.value - arrj[1]|float %} <!-- Lower the variable by a percentage each time, as per algorithm; using a temporary variable for readability-->
+			{% if holder.update({'value': var}) %} {% endif %} <!-- Forces jinja to update the variable -->
 		{% endfor %}
 	{% endif %}
 </body>
