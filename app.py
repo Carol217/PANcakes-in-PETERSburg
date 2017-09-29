@@ -18,8 +18,8 @@ def occupy():
 	#test array to show arrays can be turned into tables
 	#fakearr =[[1, 2, 3], [4, 5, 6]]
 	#same code as from reader.py
-	target_doc = csv.reader(open('occupations/occupations.csv', 'rU'), delimiter= ",", quotechar = "\"")
-	target_doc2 = csv.reader(open('occupations/occupations.csv', 'rU'), delimiter= ",", quotechar = "\"") #You need a second one because jinja only lets you cycle through an array once
+	target_doc = csv.reader(open('data/occupations.csv', 'rU'), delimiter= ",", quotechar = "\"")
+	target_doc2 = csv.reader(open('data/occupations.csv', 'rU'), delimiter= ",", quotechar = "\"") #You need a second one because jinja only lets you cycle through an array once
 	r = random.random()*98.8 #Number slightly reduced due to jinja being weird
 	return render_template('data.html', title='Census of Occupations', csv=target_doc, rand=r, csv2=target_doc2)
 	return retStr
